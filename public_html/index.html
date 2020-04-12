@@ -17,20 +17,28 @@ and open the template in the editor.
             <input type="text" name="Address"><br>
             Price:
             <input type="text" name="Price"><br>
+
             Does the place include lease:
-            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-  <label for="vehicle1"> Yes </label><br>
-  Does the rent paid include electricity, internet:
-            <input type8="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-  <label for="vehicle1"> Yes </label><br>
-  
-  Share with landlord:
-            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-  <label for="vehicle1"> Yes </label><br>
-  
+            <input type="radio" id="lease" name="lease" value="yes">
+            <label> Yes </label>
+            <input type="radio" id="lease" name="lease" value="no">
+            <label> No </label><br>
             
+            Does the rent paid include electricity, internet:
+            <input type="radio" id="lease" name="amenities" value="yes">
+            <label> Yes </label>
+            <input type="radio" id="lease" name="amenities" value="no">
+            <label> No </label><br>
+
+            Share with landlord:
+            <input type="radio" id="lease" name="share" value="yes">
+            <label> Yes </label>
+            <input type="radio" id="lease" name="share" value="no">
+            <label> No </label><br>
+
+
             <input type="submit" value="Compare">
-            
+
         </form>
     </body>
 </html>
