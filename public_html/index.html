@@ -9,11 +9,16 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="/css/home.css" rel="stylesheet" type="text/css">
+        <link href="css/home.css" rel="stylesheet" type="text/css">
 
     </head>
     <body>
-        <script></script>
+        How many places do you want to compare?
+        <input type="number" id="numberOfPlaces" min="1" max="4">
+        <script>
+            numberOfPlaces=document.getElementById("numberOfPlaces");
+            alert(numberOfPlaces)
+        </script>
         <form>
             Address:
             <input type="text" name="Address"><br>
@@ -39,7 +44,7 @@ and open the template in the editor.
             <label> No </label><br>
 
 
-            <input type="submit" value="Compare">
+            <input type="submit" value="Rate my options">
 
         </form>
     </body>
