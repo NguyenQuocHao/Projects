@@ -25,15 +25,16 @@ and open the template in the editor.
                 var container = document.getElementById('container').innerHTML;
 
                 var numberOfPlaces = document.getElementById("numberOfPlaces").value;
-                alert("3.5.5 "+numberOfPlaces)
+                alert("3.5.7 "+numberOfPlaces)
                 var i;
                 for (i = 0; i < numberOfPlaces; i++) {
                     container += '<form>';
                     container += '<p>Address</p>';
                     container += '<input type="text" name="Address"><br>';
                     container += '</form>';
-
                 }
+                document.write(container);
+
             }
         </script>
 
