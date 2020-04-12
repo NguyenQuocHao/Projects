@@ -16,23 +16,25 @@ and open the template in the editor.
         How many places do you want to compare?
         <form method="post" action="index.html">
             <input type="number" id="numberOfPlaces" min="1" max="4">
-            <input type="submit" value="Apple">
+            <input type="submit" value="Apple" onclick="test()">
         </form>
 
         <div id="container"></div>
 
         <script>
-            var container = document.getElementById('container').innerHTML;
+            function test() {
+                var container = document.getElementById('container').innerHTML;
 
-            var numberOfPlaces = document.getElementById("numberOfPlaces");
-            alert(numberOfPlaces)
-            var i;
-            for (i = 0; i < numberOfPlaces; i++) {
-                container += '<form>';
-                container += '<p>Address</p>';
-                container += '<input type="text" name="Address"><br>';
-                container += '</form>';
+                var numberOfPlaces = document.getElementById("numberOfPlaces");
+                alert(numberOfPlaces)
+                var i;
+                for (i = 0; i < numberOfPlaces; i++) {
+                    container += '<form>';
+                    container += '<p>Address</p>';
+                    container += '<input type="text" name="Address"><br>';
+                    container += '</form>';
 
+                }
             }
         </script>
 
