@@ -13,28 +13,75 @@ and open the template in the editor.
 
     </head>
     <body>
+        <h4>
+            How we calculate:
+        </h4>
+        <p>
+            Distance to work: maximum 3<br>
+            Price: maximum 3<br>
+            Amenities: maximum 2<br>
+            Lease: maximum 1<br>
+            Landlord sharing: maximum 1<br>
+            
+            Maximum point: 10
+            
+        </p>
         How many places do you want to compare?
         <br>
-            <input type="number" id="numberOfPlaces" min="1" max="4">
-            <input type="submit" value="Apply" onclick="test()">
-
+        <form>
+            <input type="number" id="numberOfPlaces" min="1" max="4" required>
+            <input type="button" value="Apply" onclick="test()">
+        </form>
         <div id="container"></div>
 
         <script>
             function test() {
-                var container = document.getElementById('container').innerHTML;
-
-                var numberOfPlaces = document.getElementById("numberOfPlaces").value;
-                alert("3.5.7 "+numberOfPlaces)
-                var i;
-                for (i = 0; i < numberOfPlaces; i++) {
-                    container += '<form>';
-                    container += '<p>Address</p>';
-                    container += '<input type="text" name="Address"><br>';
-                    container += '</form>';
+                var container;
+                container += '<a href="index.html"><input type="button" onclick="clear()" value="Clear options"></a>';
+                
+                function clear(){
+                    document.getElementById('container').innerHTML = "";
                 }
-                document.write(container);
+                
+                numberOfPlaces = document.getElementById('numberOfPlaces').value;
+                var i;
+                if (numberOfPlaces < 5) {
+                    for (i = 0; i < numberOfPlaces; i++) {
+                        //Print Address
+                        container += '<form>';
+                        container += '<p>Address:</p>';
+                        container += '<input type="text" name="Address"><br>';
 
+                        //Print price
+                        container += '<p>Price (if you share only include the amount you pay):</p>'
+                        container += '<input type="number" min="0" name="Price"><br>'
+
+                        //Print Lease
+                        container += 'Does the place include lease:'
+                        container += '<input type = "radio" id = "lease" name = "lease" value = "yes">'
+                        container += '<label > Yes </label>'
+                        container += '<input type = "radio" id = "lease" name = "lease" value = "no">'
+                        container += '<label > No </label><br>'
+
+                        //Print amentities
+                        container += 'Does the rent paid include electricity, internet:'
+                        container += '<input type = "radio" id = "lease" name = "amenities" value = "yes">'
+                        container += '<label> Yes </label>'
+                        container += '<input type = "radio" id = "lease" name = "amenities" value = "no">'
+                        container += '<label> No </label><br>'
+
+                        //Print amentities
+                        container += 'Share with landlord:'
+                        container += '<input type = "radio" id = "lease" name = "share" value = "yes">'
+                        container += ' <label> Yes </label>'
+                        container += ' <input type = "radio" id = "lease" name = "share" value = "no">'
+                        container += ' <label> No </label><br>'
+
+                        container += '</form>';
+                    }
+                }
+                //document.write(container1);
+                document.getElementById('container').innerHTML = container;
             }
         </script>
 
