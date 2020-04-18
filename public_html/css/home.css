@@ -12,6 +12,8 @@ form{
     border: 2px solid black;
 }
 
-.remove{
+#removeButton{
+    background-color: red;
+    color: white;
     float: right;
 }

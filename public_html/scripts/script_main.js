@@ -22,7 +22,8 @@ function addLocation() {
     //Create remove form button
     var button = document.createElement("INPUT");
     button.type = "button";
-    button.value = "Remove";
+    button.id="removeButton";
+    button.value = "X";
     button.onclick = function(){
         var elmnt = document.getElementById("form");
         elmnt.remove();
