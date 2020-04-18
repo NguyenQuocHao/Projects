@@ -18,6 +18,8 @@ function addLocation() {
     //Create form
     var myForm = document.createElement("FORM");
     myForm.id = "form";
+    
+    //Create remove form button
     var button = document.createElement("INPUT");
     button.type = "button";
     button.value = "Remove";
@@ -35,6 +37,8 @@ function addLocation() {
     address.setAttribute("type", "text");
     address.setAttribute("name", "Address");
     myForm.appendChild(address);
+    
+    
     //Create Price field
     myForm.appendChild(document.createElement("BR")); //Add newline
     text = document.createTextNode("Price:");
@@ -44,6 +48,8 @@ function addLocation() {
     price.type = "text";
     price.name = "Price";
     myForm.appendChild(price);
+    
+    
     //Create Lease field
     myForm.appendChild(document.createElement("BR")); //Add newline
     text = document.createTextNode("Does the place include lease:");
@@ -71,6 +77,8 @@ function addLocation() {
     text = document.createTextNode("No");
     label.appendChild(text);
     myForm.appendChild(label);
+    
+    
     //Create Amenities field
     myForm.appendChild(document.createElement("BR")); //Add newline
     text = document.createTextNode("Does the rent paid include electricity, internet:");
@@ -98,6 +106,8 @@ function addLocation() {
     text = document.createTextNode("No");
     label.appendChild(text);
     myForm.appendChild(label);
+    
+    
     //Create Share with Landlord field
     myForm.appendChild(document.createElement("BR")); //Add newline
     text = document.createTextNode("Share with landlord:");
@@ -125,22 +135,6 @@ function addLocation() {
     text = document.createTextNode("No");
     label.appendChild(text);
     myForm.appendChild(label);
-//            var fileId = 0; // used by the addFile() function to keep track of IDs
-//            function addFile() {
-//                fileId++; // increment fileId to get a unique ID for the new element
-//                var html = '<input type="file" name="uploaded_files[]" /> ' +
-//                        '<a href="" onclick="javascript:removeElement('file - ' + fileId + ''); return false;">Remove</a>';
-//                        addElement('files', 'p', 'file-' + fileId, html);
-//            }
-//        }
 
     document.body.appendChild(myForm);
-//    var elmnt = document.getElementById("form");
-//    elmnt.remove();
-}
-
-function removeForm() {
-    var elmnt = document.getElementById("form");
-    alert("hello")
-    elmnt.remove();
 }

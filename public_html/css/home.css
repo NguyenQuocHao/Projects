@@ -11,3 +11,7 @@ and open the template in the editor.
 form{
     border: 2px solid black;
 }
+
+.remove{
+    float: right;
+}
