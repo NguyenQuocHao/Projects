@@ -4,30 +4,30 @@
  * and open the template in the editor.
  */
 
-
-function clear() {
-    document.getElementById('container').innerHTML = "";
-}
 var c = 0;
+var data = [4][5];
 
 function addLocation() {
     // Limit the maximum forms (4 max)
     if (c < 4) {
         c++;
+
         //Create form
         var myForm = document.createElement("FORM");
-        myForm.id = "form";
+        myForm.id = "form" + c;
+        document.body.appendChild(document.createTextNode("Unit " + c));
 
         //Create remove form button
         var button = document.createElement("INPUT");
         button.type = "button";
-        button.id = "removeButton";
+        button.id = "removeButton" + c;
+        button.setAttribute("class", "remove");
+        var lastChar = button.id.substr(button.id.length - 1);  //get last number id of the button
         button.value = "X";
         button.onclick = function() {
-            var elmnt = document.getElementById("form");
+            var elmnt = document.getElementById("form" + lastChar);
             elmnt.remove();
             c--;
-            alert(c)
         }
         myForm.appendChild(button);
 
@@ -47,7 +47,7 @@ function addLocation() {
         myForm.appendChild(text);
         myForm.appendChild(document.createElement("BR")); //Add newline
         var price = document.createElement("INPUT");
-        price.type = "text";
+        price.type = "number";
         price.name = "Price";
         myForm.appendChild(price);
 
@@ -139,5 +139,9 @@ function addLocation() {
         myForm.appendChild(label);
 
         document.body.appendChild(myForm);
+        
+        if (c=4){
+            c=0;
+        }
     }
 }

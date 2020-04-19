@@ -10,9 +10,10 @@ and open the template in the editor.
 
 form{
     border: 2px solid black;
+    padding: 3px;
 }
 
-#removeButton{
+input.remove{
     background-color: red;
     color: white;
     float: right;
