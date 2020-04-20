@@ -15,7 +15,10 @@ function addLocation() {
         //Create form
         var myForm = document.createElement("FORM");
         myForm.id = "form" + c;
-        document.body.appendChild(document.createTextNode("Unit " + c));
+        var unitText = document.createElement("P");
+        unitText.id="unitText"+c;
+        unitText.innerHTML = "Unit " + c;
+        document.body.appendChild(unitText);
 
         //Create remove form button
         var button = document.createElement("INPUT");
@@ -25,9 +28,27 @@ function addLocation() {
         var lastChar = button.id.substr(button.id.length - 1);  //get last number id of the button
         button.value = "X";
         button.onclick = function() {
-            var elmnt = document.getElementById("form" + lastChar);
-            elmnt.remove();
+            var deleteForm = document.getElementById("form" + lastChar);
+            deleteForm.remove(); //Delete the form
+            unitText.remove();  //Delete the text above the form
+            if (lastChar < c) {
+                var gap = c - lastChar;
+                for (var i = 1; i <= gap; i++) {
+                    var replaceFormPosition = parseInt(lastChar) + parseInt(i);
+                    var replaceForm = document.getElementById("form" + replaceFormPosition);
+                    var newUnitText = document.getElementById("unitText" + replaceFormPosition);
+                    
+                    var newLastChar = replaceForm.id.substr(replaceForm.id.length - 1);
+                    replaceFormPosition = parseInt(newLastChar) - 1;
+                    replaceForm.id = "form" + (replaceFormPosition);
+                    newUnitText.id="unitText"+replaceFormPosition;
+                    newUnitText.innerHTML = "Unit " + replaceFormPosition;
+//                    alert(replaceForm.id)
+                }
+            }
+
             c--;
+
         }
         myForm.appendChild(button);
 
@@ -139,9 +160,6 @@ function addLocation() {
         myForm.appendChild(label);
 
         document.body.appendChild(myForm);
-        
-        if (c=4){
-            c=0;
-        }
+
     }
 }
