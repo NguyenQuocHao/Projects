@@ -15,45 +15,49 @@ function addLocation() {
         //Create form
         var myForm = document.createElement("FORM");
         myForm.id = "form" + c;
-        var unitText = document.createElement("P");
-        unitText.id="unitText"+c;
-        unitText.innerHTML = "Unit " + c;
-        document.body.appendChild(unitText);
+        var unitTitle = document.createElement("P"); //Title for each form
+        unitTitle.id = "unitText" + c;
+        document.body.appendChild(unitTitle);
+        unitTitle.innerHTML = "Unit " + c;
+
 
         //Create remove form button
         var button = document.createElement("INPUT");
         button.type = "button";
         button.id = "removeButton" + c;
         button.setAttribute("class", "remove");
-        var lastChar = button.id.substr(button.id.length - 1);  //get last number id of the button
         button.value = "X";
         button.onclick = function() {
+            var lastChar = button.id.substr(button.id.length - 1);  //get last number id of the button
             var deleteForm = document.getElementById("form" + lastChar);
+            alert("last char: " + lastChar)
             deleteForm.remove(); //Delete the form
-            unitText.remove();  //Delete the text above the form
+            unitTitle.remove();  //Delete form title
             if (lastChar < c) {
                 var gap = c - lastChar;
                 for (var i = 1; i <= gap; i++) {
                     var replaceFormPosition = parseInt(lastChar) + parseInt(i);
                     var replaceForm = document.getElementById("form" + replaceFormPosition);
                     var newUnitText = document.getElementById("unitText" + replaceFormPosition);
-                    
+                    var newButton = document.getElementById("removeButton" + replaceFormPosition);
+                    alert(newButton.id);
+
+
                     var newLastChar = replaceForm.id.substr(replaceForm.id.length - 1);
                     replaceFormPosition = parseInt(newLastChar) - 1;
-                    replaceForm.id = "form" + (replaceFormPosition);
-                    newUnitText.id="unitText"+replaceFormPosition;
-                    newUnitText.innerHTML = "Unit " + replaceFormPosition;
-//                    alert(replaceForm.id)
+                    replaceForm.id = "form" + replaceFormPosition;// 
+                    newUnitText.id = "unitText" + replaceFormPosition;// 
+//                    newUnitText.innerHTML = "Unit " + replaceFormPosition;
+                    newUnitText.innerHTML += replaceFormPosition;
+                    newButton.id = "removeButton" + replaceFormPosition;// 
                 }
             }
-
             c--;
-
         }
         myForm.appendChild(button);
 
         //Create Address field
-        var text = document.createTextNode("Address:");
+        var text = document.createTextNode("Address:" + c);
         myForm.appendChild(text);
         myForm.appendChild(document.createElement("BR")); //Add newline
         var address = document.createElement("INPUT");
