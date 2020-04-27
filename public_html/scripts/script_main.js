@@ -5,7 +5,6 @@
  */
 
 var c = 0;
-var data = [4][5];
 
 function addLocation() {
     // Limit the maximum forms (4 max)
@@ -15,6 +14,7 @@ function addLocation() {
         //Create form
         var myForm = document.createElement("FORM");
         myForm.id = "form" + c;
+        myForm.name = "form";
         var unitTitle = document.createElement("P"); //Title for each form
         unitTitle.id = "unitText" + c;
         document.body.appendChild(unitTitle);
@@ -62,7 +62,7 @@ function addLocation() {
         myForm.appendChild(document.createElement("BR")); //Add newline
         var address = document.createElement("INPUT");
         address.setAttribute("type", "text");
-        address.setAttribute("name", "Address");
+        address.setAttribute("name", "address");
         myForm.appendChild(address);
 
 
@@ -73,7 +73,7 @@ function addLocation() {
         myForm.appendChild(document.createElement("BR")); //Add newline
         var price = document.createElement("INPUT");
         price.type = "number";
-        price.name = "Price";
+        price.name = "price";
         myForm.appendChild(price);
 
 
@@ -85,8 +85,7 @@ function addLocation() {
         //Create yes button
         var lease = document.createElement("INPUT");
         lease.type = "radio";
-        lease.name = "Lease";
-        lease.id = "Lease";
+        lease.name = "lease";
         lease.value = "yes";
         myForm.appendChild(lease);
         var label = document.createElement("LABEL");
@@ -96,8 +95,7 @@ function addLocation() {
         //Create no button
         var lease = document.createElement("INPUT");
         lease.type = "radio";
-        lease.name = "Lease";
-        lease.id = "Lease";
+        lease.name = "lease";
         lease.value = "no";
         myForm.appendChild(lease);
         var label = document.createElement("LABEL");
@@ -112,23 +110,21 @@ function addLocation() {
         myForm.appendChild(text);
         myForm.appendChild(document.createElement("BR")); //Add newline
         //Create yes button
-        var lease = document.createElement("INPUT");
-        lease.type = "radio";
-        lease.name = "Amenities";
-        lease.id = "Amenities";
-        lease.value = "yes";
-        myForm.appendChild(lease);
+        var amenities = document.createElement("INPUT");
+        amenities.type = "radio";
+        amenities.name = "amenities";
+        amenities.value = "yes";
+        myForm.appendChild(amenities);
         var label = document.createElement("LABEL");
         text = document.createTextNode("Yes");
         label.appendChild(text);
         myForm.appendChild(label);
         //Create no button
-        var lease = document.createElement("INPUT");
-        lease.type = "radio";
-        lease.name = "Amenities";
-        lease.id = "Amenities";
-        lease.value = "no";
-        myForm.appendChild(lease);
+        var amenities = document.createElement("INPUT");
+        amenities.type = "radio";
+        amenities.name = "amenities";
+        amenities.value = "no";
+        myForm.appendChild(amenities);
         var label = document.createElement("LABEL");
         text = document.createTextNode("No");
         label.appendChild(text);
@@ -141,23 +137,21 @@ function addLocation() {
         myForm.appendChild(text);
         myForm.appendChild(document.createElement("BR")); //Add newline
         //Create yes button
-        var lease = document.createElement("INPUT");
-        lease.type = "radio";
-        lease.name = "Landlord";
-        lease.id = "Landlord";
-        lease.value = "yes";
-        myForm.appendChild(lease);
+        var landlordShare = document.createElement("INPUT");
+        landlordShare.type = "radio";
+        landlordShare.name = "landlord";
+        landlordShare.value = "yes";
+        myForm.appendChild(landlordShare);
         var label = document.createElement("LABEL");
         text = document.createTextNode("Yes");
         label.appendChild(text);
         myForm.appendChild(label);
         //Create no button
-        var lease = document.createElement("INPUT");
-        lease.type = "radio";
-        lease.name = "Landlord";
-        lease.id = "Landlord";
-        lease.value = "no";
-        myForm.appendChild(lease);
+        var landlordShare = document.createElement("INPUT");
+        landlordShare.type = "radio";
+        landlordShare.name = "landlord";
+        landlordShare.value = "no";
+        myForm.appendChild(landlordShare);
         var label = document.createElement("LABEL");
         text = document.createTextNode("No");
         label.appendChild(text);
@@ -166,4 +160,20 @@ function addLocation() {
         document.body.appendChild(myForm);
 
     }
+}
+
+function calculate() {
+//    var data = [4][5];
+    alert("open")
+    var grades = [4];
+    for (var i = 0; i < c; i++) {
+//        var form = document.getElementByName("form" + i);
+        var address = document.getElementsByName("address")[i].value;
+        var price = document.getElementsByName("price")[i].value;
+        var lease = document.getElementsByName("lease")[i].value;
+        var amenities = document.getElementsByName("amenities")[i].value;
+
+    }
+    alert("close")
+
 }
