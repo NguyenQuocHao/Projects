@@ -82,26 +82,21 @@ function addLocation() {
         text = document.createTextNode("Does the place include lease:");
         myForm.appendChild(text);
         myForm.appendChild(document.createElement("BR")); //Add newline
-        //Create yes button
-        var lease = document.createElement("INPUT");
-        lease.type = "radio";
-        lease.name = "lease";
-        lease.value = "yes";
-        myForm.appendChild(lease);
-        var label = document.createElement("LABEL");
-        text = document.createTextNode("Yes");
-        label.appendChild(text);
-        myForm.appendChild(label);
-        //Create no button
-        var lease = document.createElement("INPUT");
-        lease.type = "radio";
-        lease.name = "lease";
-        lease.value = "no";
-        myForm.appendChild(lease);
-        var label = document.createElement("LABEL");
-        text = document.createTextNode("No");
-        label.appendChild(text);
-        myForm.appendChild(label);
+        //Create options
+        var lease = document.createElement("SELECT");
+        lease.id = "lease" + c
+        lease.name = "lease"
+        var leaseNo = document.createElement("OPTION");
+        var t = document.createTextNode("No");
+        leaseNo.appendChild(t);
+        leaseNo.value = "no"
+        var leaseYes = document.createElement("OPTION");
+        t = document.createTextNode("Yes");
+        leaseYes.appendChild(t);
+        leaseYes.value = "yes"
+        lease.appendChild(leaseNo)
+        lease.appendChild(leaseYes)
+        myForm.appendChild(lease)
 
 
         //Create Amenities field
@@ -109,26 +104,21 @@ function addLocation() {
         text = document.createTextNode("Does the rent paid include electricity, internet:");
         myForm.appendChild(text);
         myForm.appendChild(document.createElement("BR")); //Add newline
-        //Create yes button
-        var amenities = document.createElement("INPUT");
-        amenities.type = "radio";
-        amenities.name = "amenities";
-        amenities.value = "yes";
-        myForm.appendChild(amenities);
-        var label = document.createElement("LABEL");
-        text = document.createTextNode("Yes");
-        label.appendChild(text);
-        myForm.appendChild(label);
-        //Create no button
-        var amenities = document.createElement("INPUT");
-        amenities.type = "radio";
-        amenities.name = "amenities";
-        amenities.value = "no";
-        myForm.appendChild(amenities);
-        var label = document.createElement("LABEL");
-        text = document.createTextNode("No");
-        label.appendChild(text);
-        myForm.appendChild(label);
+        //Create options
+        var lease = document.createElement("SELECT");
+        lease.id = "amenities" + c
+        lease.name = "amenities"
+        var leaseNo = document.createElement("OPTION");
+        var t = document.createTextNode("No");
+        leaseNo.appendChild(t);
+        leaseNo.value = "no"
+        var leaseYes = document.createElement("OPTION");
+        t = document.createTextNode("Yes");
+        leaseYes.appendChild(t);
+        leaseYes.value = "yes"
+        lease.appendChild(leaseNo)
+        lease.appendChild(leaseYes)
+        myForm.appendChild(lease)
 
 
         //Create Share with Landlord field
@@ -136,44 +126,62 @@ function addLocation() {
         text = document.createTextNode("Share with landlord:");
         myForm.appendChild(text);
         myForm.appendChild(document.createElement("BR")); //Add newline
-        //Create yes button
-        var landlordShare = document.createElement("INPUT");
-        landlordShare.type = "radio";
-        landlordShare.name = "landlord";
-        landlordShare.value = "yes";
-        myForm.appendChild(landlordShare);
-        var label = document.createElement("LABEL");
-        text = document.createTextNode("Yes");
-        label.appendChild(text);
-        myForm.appendChild(label);
-        //Create no button
-        var landlordShare = document.createElement("INPUT");
-        landlordShare.type = "radio";
-        landlordShare.name = "landlord";
-        landlordShare.value = "no";
-        myForm.appendChild(landlordShare);
-        var label = document.createElement("LABEL");
-        text = document.createTextNode("No");
-        label.appendChild(text);
-        myForm.appendChild(label);
+        //Create options
+        var lease = document.createElement("SELECT");
+        lease.id = "landlord" + c
+        lease.name = "landlord"
+        var leaseNo = document.createElement("OPTION");
+        var t = document.createTextNode("No");
+        leaseNo.appendChild(t);
+        leaseNo.value = "no"
+        var leaseYes = document.createElement("OPTION");
+        t = document.createTextNode("Yes");
+        leaseYes.appendChild(t);
+        leaseYes.value = "yes"
+        lease.appendChild(leaseNo)
+        lease.appendChild(leaseYes)
+        myForm.appendChild(lease)
 
         document.body.appendChild(myForm);
-
     }
 }
 
 function calculate() {
 //    var data = [4][5];
-    alert("open")
+//    alert("open")
     var grades = [4];
     for (var i = 0; i < c; i++) {
-//        var form = document.getElementByName("form" + i);
+        var form = document.getElementById("form" + parseInt(i + 1));
         var address = document.getElementsByName("address")[i].value;
         var price = document.getElementsByName("price")[i].value;
         var lease = document.getElementsByName("lease")[i].value;
+//        var lease = document.getElementById("lease" + parseInt(i + 1)).value;
         var amenities = document.getElementsByName("amenities")[i].value;
+        var landlord = document.getElementsByName("landlord")[i].value;
 
+        grades[i] = 0
+
+        grades[i] += 6
+
+        if (lease == "yes") {
+            grades[i] += 1
+        }
+        if (amenities == "yes") {
+            grades[i] += 2
+        }
+        if (landlord == "yes") {
+            grades[i] += 1
+        }
+
+        var text = "Unit " + form.id + ": " + grades[i]
+        var priceList = document.getElementsByName("price");
+        text += "\n Lease: " + lease
+        text += "\nAmen: " + amenities
+        text += "\nLord: " + landlord
+        var printGrades = document.createTextNode(text);
+        document.body.appendChild(printGrades)
+        document.body.appendChild(document.createElement("BR")); //Add newline
     }
-    alert("close")
+//    alert("close")
 
 }
