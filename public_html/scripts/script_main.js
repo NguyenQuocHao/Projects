@@ -3,9 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+function check() {
+//    document.getElementById('mySelect1').disabled = !elem.selectedIndex;
+    var landlord = document.getElementById('landlord1').value;
+    var foodInclusion = document.getElementById('foodInclusion');
+    if (landlord == "yes") {
+//        document.getElementById("foodInclusion").innerHTML = "Paragraph changed!";
+
+        var text = document.createTextNode("Does the landlord feed you: ");
+        foodInclusion.appendChild(text);
+        foodInclusion.appendChild(document.createElement("BR")); //Add newline
+        //Create options
+        var foodInclusionOpts = document.createElement("SELECT");
+        foodInclusionOpts.id = "foodInclusion" + c
+        foodInclusionOpts.name = "foodInclusion"
+        var foodInclusionOptsNo = document.createElement("OPTION");
+        var t = document.createTextNode("No");
+        foodInclusionOptsNo.appendChild(t);
+        foodInclusionOptsNo.value = "no"
+        var foodInclusionOptsYes = document.createElement("OPTION");
+        t = document.createTextNode("Yes");
+        foodInclusionOptsYes.appendChild(t);
+        foodInclusionOptsYes.value = "yes"
+        foodInclusionOpts.appendChild(foodInclusionOptsNo)
+        foodInclusionOpts.appendChild(foodInclusionOptsYes)
+        foodInclusion.appendChild(foodInclusionOpts)
+    }
+    else
+        document.getElementById("foodInclusion").innerHTML = "";
+}
 
 var c = 0;
-
 function addLocation() {
     // Limit the maximum forms (4 max)
     if (c < 4) {
@@ -130,6 +158,9 @@ function addLocation() {
         var lease = document.createElement("SELECT");
         lease.id = "landlord" + c
         lease.name = "landlord"
+        lease.onchange = function() {
+            check()
+        } //;"if (this.selectedIndex) check()";
         var leaseNo = document.createElement("OPTION");
         var t = document.createTextNode("No");
         leaseNo.appendChild(t);
@@ -141,6 +172,10 @@ function addLocation() {
         lease.appendChild(leaseNo)
         lease.appendChild(leaseYes)
         myForm.appendChild(lease)
+
+        var div = document.createElement("DIV");
+        div.id = "foodInclusion";
+        myForm.appendChild(div)
 
         document.body.appendChild(myForm);
     }
@@ -158,9 +193,11 @@ function calculate() {
 //        var lease = document.getElementById("lease" + parseInt(i + 1)).value;
         var amenities = document.getElementsByName("amenities")[i].value;
         var landlord = document.getElementsByName("landlord")[i].value;
-
+        if (landlord == "yes") {
+            var foodInclusion = document.getElementsByName("foodInclusion")[i].value;
+        }
+        
         grades[i] = 0
-
         grades[i] += 6
 
         if (lease == "yes") {
@@ -169,9 +206,17 @@ function calculate() {
         if (amenities == "yes") {
             grades[i] += 2
         }
-        if (landlord == "yes") {
-            grades[i] += 1
+        if (landlord == "no") {
+            grades[i] += 0.5
+            if (foodInclusion == "yes")
+                grades[i] += 0.5
         }
+        else {
+            if (foodInclusion == "yes") {
+                grades[i] += 0.5
+            }
+        }
+
 
         var text = "Unit " + form.id + ": " + grades[i]
         var priceList = document.getElementsByName("price");
