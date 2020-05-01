@@ -1,40 +1,114 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+Design by TEMPLATED
+http://templated.co
+Released for free under the Creative Commons Attribution License
+
+Name       : Assembly 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20140330
+
 -->
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Finding home</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/home.css" rel="stylesheet" type="text/css">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <link href="http://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet" />
+        <link href="default.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+
+        <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
 
     </head>
     <body>
-        <h4>
-            How we calculate:
-        </h4>
-        <p>
-            Distance to work: maximum 3<br>
-            Price: maximum 3<br>
-            Amenities: maximum 2<br>
-            Lease: maximum 1<br>
-            Landlord sharing: maximum 1 (0.7: no without food, 1: no with food;
-            0: yes without food, yes with food: 0.5) <br>
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <div id="logo">
+                    <h1><a href="#">Assembly</a></h1>
+                </div>
+                <div id="menu">
+                    <ul>
+                        <li class="active"><a href="#" accesskey="1" title="">Homepage</a></li>
+                        <li><a href="#" accesskey="3" title="">About Us</a></li>
+                        <li><a href="#" accesskey="5" title="">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
 
-            Total Maximum point: 10
+            <div id="banner" class="container">
+                <div class="title">
+                    <h2>Chán lắm</h2>
+                    <span class="byline">Đời là thế</span>
+                </div>
+                <ul class="actions">
+                    <li><a href="#" class="button">Button</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="welcome">
+            <div class="container">
+                <div class="title">
+                    <h2>How we calculate:</h2>
+                    <span class="byline">NONONO</span>
+                </div>
+                Distance to work: maximum 3<br>
+                    Price: maximum 3<br>
+                        Amenities: maximum 2<br>
+                            Lease: maximum 1<br>
+                                Landlord sharing: maximum 1 (0.7: no without food, 1: no with food;
+                                0: yes without food, yes with food: 0.5) <br>
 
-        </p>
-        <br>How many places do you want to compare?<br>
-        <input type="button" value="Add" onclick="addLocation()"><br>
-        <br>
-        <input type="button" value="Calculate" onclick="calculate()"><br>
-        <div id="container"></div>
+                                    Total Maximum point: 10
 
-        <script src="scripts/script_main.js">
-        </script>
+                                    <ul class="actions">
+                                        <li><a href="#" class="button">Another Button</a></li>
+                                    </ul>
 
-    </body>
-</html>
+                                    </div>
+                                    </div>
+
+                                    <div id="wrapper">
+                                        <div id="three-column" class="container">
+                                            <div class="title">
+                                                <h2>Choose your home</h2>
+                                                <span class="byline">Add rent unit</span><br>
+                                                    <a href="#wrapper" class="button button-alt" onclick="addLocation()">+</a>
+                                                    <br><br>    
+                                                    <div id="formSection"></div>
+                                                        </div>
+                                                        <script src="scripts/script_main.js"></script>
+
+                                                        <!--
+                                                        <form class="boxA">
+                                                            <p>Box A</p>
+                                                            <a href="#" class="button button-alt">More Info</a>
+                                                        </form>
+                                                        <form class="boxB">
+                                                            <p>Box B</p>
+                                                            <a href="#" class="button button-alt">More Info</a>
+                                                        </form>
+                                                        <form class="boxC">
+                                                            <p>Box C</p>
+                                                            <a href="#" class="button button-alt">More Info</a>
+                                                        </form>
+                                                        <!--<form class="boxD">
+                                                            <p>Box D</p>
+                                                            <a href="#" class="button button-alt">More Info</a>
+                                                        </form>-->
+                                                </br>
+
+                                                <a href="#result" class="button button-alt" onclick="calculate()">Calculate</a>
+                                                <div id="result" class="result"></div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div id="copyright" class="container">
+                                            <p>&copy; Untitled. All rights reserved. | Photos by <a href="http://fotogrph.com/">Fotogrph</a> | Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</p>
+                                        </div>
+                                        </body>
+                                        </html>

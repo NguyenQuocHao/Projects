@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function check() {
+function check(landlordId) {
 //    document.getElementById('mySelect1').disabled = !elem.selectedIndex;
-    var landlord = document.getElementById('landlord1').value;
-    var foodInclusion = document.getElementById('foodInclusion');
+    var landlord = document.getElementById(landlordId).value;
+    var lastChar = landlordId.substr(landlordId.length - 1);  //get last number id of the button
+    var foodInclusion = document.getElementById('foodInclusion' + lastChar);
     if (landlord == "yes") {
-//        document.getElementById("foodInclusion").innerHTML = "Paragraph changed!";
-
         var text = document.createTextNode("Does the landlord feed you: ");
         foodInclusion.appendChild(text);
         foodInclusion.appendChild(document.createElement("BR")); //Add newline
@@ -30,11 +29,12 @@ function check() {
         foodInclusion.appendChild(foodInclusionOpts)
     }
     else
-        document.getElementById("foodInclusion").innerHTML = "";
+        document.getElementById(foodInclusion.id).innerHTML = "";
 }
 
 var c = 0;
 function addLocation() {
+    var formSection = document.getElementById("formSection");
     // Limit the maximum forms (4 max)
     if (c < 4) {
         c++;
@@ -42,11 +42,18 @@ function addLocation() {
         //Create form
         var myForm = document.createElement("FORM");
         myForm.id = "form" + c;
-        myForm.name = "form";
+        myForm.name = "form";    
         var unitTitle = document.createElement("P"); //Title for each form
-        unitTitle.id = "unitText" + c;
-        document.body.appendChild(unitTitle);
-        unitTitle.innerHTML = "Unit " + c;
+
+        var fieldset = document.createElement("FIELDSET");
+//        fieldset.style = "padding-bottom: 50px"
+        var legend = document.createElement("LEGEND");
+        legend.id = "unitText" + c;
+        legend.innerHTML = "Unit " + c;
+        fieldset.appendChild(legend)
+        myForm.appendChild(fieldset)
+
+
 
 
         //Create remove form button
@@ -58,7 +65,7 @@ function addLocation() {
         button.onclick = function() {
             var lastChar = button.id.substr(button.id.length - 1);  //get last number id of the button
             var deleteForm = document.getElementById("form" + lastChar);
-            alert("last char: " + lastChar)
+//            alert("last char: " + lastChar)
             deleteForm.remove(); //Delete the form
             unitTitle.remove();  //Delete form title
             if (lastChar < c) {
@@ -68,8 +75,7 @@ function addLocation() {
                     var replaceForm = document.getElementById("form" + replaceFormPosition);
                     var newUnitText = document.getElementById("unitText" + replaceFormPosition);
                     var newButton = document.getElementById("removeButton" + replaceFormPosition);
-                    alert(newButton.id);
-
+//                    alert(newButton.id);
 
                     var newLastChar = replaceForm.id.substr(replaceForm.id.length - 1);
                     replaceFormPosition = parseInt(newLastChar) - 1;
@@ -82,34 +88,34 @@ function addLocation() {
             }
             c--;
         }
-        myForm.appendChild(button);
+        fieldset.appendChild(button);
 
         //Create Address field
         var text = document.createTextNode("Address:" + c);
-        myForm.appendChild(text);
-        myForm.appendChild(document.createElement("BR")); //Add newline
+        fieldset.appendChild(text);
+        fieldset.appendChild(document.createElement("BR")); //Add newline
         var address = document.createElement("INPUT");
         address.setAttribute("type", "text");
         address.setAttribute("name", "address");
-        myForm.appendChild(address);
+        fieldset.appendChild(address);
 
 
         //Create Price field
-        myForm.appendChild(document.createElement("BR")); //Add newline
+        fieldset.appendChild(document.createElement("BR")); //Add newline
         text = document.createTextNode("Price:");
-        myForm.appendChild(text);
-        myForm.appendChild(document.createElement("BR")); //Add newline
+        fieldset.appendChild(text);
+        fieldset.appendChild(document.createElement("BR")); //Add newline
         var price = document.createElement("INPUT");
         price.type = "number";
         price.name = "price";
-        myForm.appendChild(price);
+        fieldset.appendChild(price);
 
 
         //Create Lease field
-        myForm.appendChild(document.createElement("BR")); //Add newline
+        fieldset.appendChild(document.createElement("BR")); //Add newline
         text = document.createTextNode("Does the place include lease:");
-        myForm.appendChild(text);
-        myForm.appendChild(document.createElement("BR")); //Add newline
+        fieldset.appendChild(text);
+        fieldset.appendChild(document.createElement("BR")); //Add newline
         //Create options
         var lease = document.createElement("SELECT");
         lease.id = "lease" + c
@@ -124,14 +130,14 @@ function addLocation() {
         leaseYes.value = "yes"
         lease.appendChild(leaseNo)
         lease.appendChild(leaseYes)
-        myForm.appendChild(lease)
+        fieldset.appendChild(lease)
 
 
         //Create Amenities field
-        myForm.appendChild(document.createElement("BR")); //Add newline
+        fieldset.appendChild(document.createElement("BR")); //Add newline
         text = document.createTextNode("Does the rent paid include electricity, internet:");
-        myForm.appendChild(text);
-        myForm.appendChild(document.createElement("BR")); //Add newline
+        fieldset.appendChild(text);
+        fieldset.appendChild(document.createElement("BR")); //Add newline
         //Create options
         var lease = document.createElement("SELECT");
         lease.id = "amenities" + c
@@ -146,20 +152,20 @@ function addLocation() {
         leaseYes.value = "yes"
         lease.appendChild(leaseNo)
         lease.appendChild(leaseYes)
-        myForm.appendChild(lease)
+        fieldset.appendChild(lease)
 
 
         //Create Share with Landlord field
-        myForm.appendChild(document.createElement("BR")); //Add newline
+        fieldset.appendChild(document.createElement("BR")); //Add newline
         text = document.createTextNode("Share with landlord:");
-        myForm.appendChild(text);
-        myForm.appendChild(document.createElement("BR")); //Add newline
+        fieldset.appendChild(text);
+        fieldset.appendChild(document.createElement("BR")); //Add newline
         //Create options
         var lease = document.createElement("SELECT");
         lease.id = "landlord" + c
         lease.name = "landlord"
         lease.onchange = function() {
-            check()
+            check(lease.id)
         } //;"if (this.selectedIndex) check()";
         var leaseNo = document.createElement("OPTION");
         var t = document.createTextNode("No");
@@ -171,19 +177,18 @@ function addLocation() {
         leaseYes.value = "yes"
         lease.appendChild(leaseNo)
         lease.appendChild(leaseYes)
-        myForm.appendChild(lease)
+        fieldset.appendChild(lease)
 
         var div = document.createElement("DIV");
-        div.id = "foodInclusion";
-        myForm.appendChild(div)
+        div.id = "foodInclusion" + c;
+        fieldset.appendChild(div)
 
-        document.body.appendChild(myForm);
+        formSection.appendChild(myForm);
     }
 }
 
 function calculate() {
-//    var data = [4][5];
-//    alert("open")
+    var result = document.getElementById("result");
     var grades = [4];
     for (var i = 0; i < c; i++) {
         var form = document.getElementById("form" + parseInt(i + 1));
@@ -196,7 +201,7 @@ function calculate() {
         if (landlord == "yes") {
             var foodInclusion = document.getElementsByName("foodInclusion")[i].value;
         }
-        
+
         grades[i] = 0
         grades[i] += 6
 
@@ -224,9 +229,7 @@ function calculate() {
         text += "\nAmen: " + amenities
         text += "\nLord: " + landlord
         var printGrades = document.createTextNode(text);
-        document.body.appendChild(printGrades)
-        document.body.appendChild(document.createElement("BR")); //Add newline
+        result.appendChild(printGrades)
+        result.appendChild(document.createElement("BR")); //Add newline
     }
-//    alert("close")
-
 }
