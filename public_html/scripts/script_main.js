@@ -7,14 +7,14 @@ function check(landlordId) {
 //    document.getElementById('mySelect1').disabled = !elem.selectedIndex;
     var landlord = document.getElementById(landlordId).value;
     var lastChar = landlordId.substr(landlordId.length - 1);  //get last number id of the button
-    var foodInclusion = document.getElementById('foodInclusion' + lastChar);
+    var foodInclusion = document.getElementById('foodInclusionContainer' + lastChar);
     if (landlord == "yes") {
         var text = document.createTextNode("Does the landlord feed you: ");
         foodInclusion.appendChild(text);
         foodInclusion.appendChild(document.createElement("BR")); //Add newline
         //Create options
         var foodInclusionOpts = document.createElement("SELECT");
-        foodInclusionOpts.id = "foodInclusion" + c
+        foodInclusionOpts.id = "foodInclusion" + lastChar
         foodInclusionOpts.name = "foodInclusion"
         var foodInclusionOptsNo = document.createElement("OPTION");
         var t = document.createTextNode("No");
@@ -27,6 +27,7 @@ function check(landlordId) {
         foodInclusionOpts.appendChild(foodInclusionOptsNo)
         foodInclusionOpts.appendChild(foodInclusionOptsYes)
         foodInclusion.appendChild(foodInclusionOpts)
+        
     }
     else
         document.getElementById(foodInclusion.id).innerHTML = "";
@@ -42,7 +43,7 @@ function addLocation() {
         //Create form
         var myForm = document.createElement("FORM");
         myForm.id = "form" + c;
-        myForm.name = "form";    
+        myForm.name = "form";
         var unitTitle = document.createElement("P"); //Title for each form
 
         var fieldset = document.createElement("FIELDSET");
@@ -178,9 +179,11 @@ function addLocation() {
         lease.appendChild(leaseNo)
         lease.appendChild(leaseYes)
         fieldset.appendChild(lease)
+        
 
         var div = document.createElement("DIV");
-        div.id = "foodInclusion" + c;
+//        div.type="hidden"
+        div.id = "foodInclusionContainer" + c;
         fieldset.appendChild(div)
 
         formSection.appendChild(myForm);
@@ -191,19 +194,20 @@ function calculate() {
     var result = document.getElementById("result");
     var grades = [4];
     for (var i = 0; i < c; i++) {
+        grades[i] = 0
         var form = document.getElementById("form" + parseInt(i + 1));
         var address = document.getElementsByName("address")[i].value;
         var price = document.getElementsByName("price")[i].value;
         var lease = document.getElementsByName("lease")[i].value;
-//        var lease = document.getElementById("lease" + parseInt(i + 1)).value;
         var amenities = document.getElementsByName("amenities")[i].value;
         var landlord = document.getElementsByName("landlord")[i].value;
         if (landlord == "yes") {
-            var foodInclusion = document.getElementsByName("foodInclusion")[i].value;
+            var foodInclusion = document.getElementById("foodInclusion" + parseInt(i + 1)).value;
+            if (foodInclusion == "yes") {
+                grades[i] += 0.5
+                alert(document.getElementById("foodInclusion" + parseInt(i + 1)).id)
+            }
         }
-
-        grades[i] = 0
-        grades[i] += 6
 
         if (lease == "yes") {
             grades[i] += 1
@@ -216,13 +220,22 @@ function calculate() {
             if (foodInclusion == "yes")
                 grades[i] += 0.5
         }
-        else {
-            if (foodInclusion == "yes") {
-                grades[i] += 0.5
-            }
+        
+        if (price<450) {
+            grades[i] += 3
         }
+        else if (price>=450 & price <=650) {
+            grades[i] += 2
+        }
+        else if (price>650 & price<1000) {
+            grades[i] += 1
+        }
+        else if (price>=1000) {
+            grades[i] += 0
+        }
+        grades[i] += 3// address
 
-
+        //Print results
         var text = "Unit " + form.id + ": " + grades[i]
         var priceList = document.getElementsByName("price");
         text += "\n Lease: " + lease
@@ -233,3 +246,8 @@ function calculate() {
         result.appendChild(document.createElement("BR")); //Add newline
     }
 }
+
+
+//To-do:
+//- fix landlord feed you error (unit3: 6.5, unit: 7)
+//- Turn results into forms
