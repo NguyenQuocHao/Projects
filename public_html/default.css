@@ -157,7 +157,8 @@ input.remove{
 	
 	.button-alt
 	{
-		padding: 1em 2em;
+		padding: 5px 12px;
+                margin-left: 10px;
 		border-color: rgba(0,0,0,.8);
 		color: #FFF;
 	}
@@ -193,6 +194,20 @@ input.remove{
 	{
 		//float: right;
 	}
+        
+        .result1,
+        .result2,
+        .result3,
+        .result4
+        {
+            display: inline-block;
+            width: 275px;
+            margin: 10px;
+            
+	}
+        .result1{
+            border: 10px solid black;
+        }
 
 	
 /*********************************************************************************/

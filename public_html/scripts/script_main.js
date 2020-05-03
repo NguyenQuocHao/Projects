@@ -27,7 +27,7 @@ function check(landlordId) {
         foodInclusionOpts.appendChild(foodInclusionOptsNo)
         foodInclusionOpts.appendChild(foodInclusionOptsYes)
         foodInclusion.appendChild(foodInclusionOpts)
-        
+
     }
     else
         document.getElementById(foodInclusion.id).innerHTML = "";
@@ -45,7 +45,6 @@ function addLocation() {
         myForm.id = "form" + c;
         myForm.name = "form";
         var unitTitle = document.createElement("P"); //Title for each form
-
         var fieldset = document.createElement("FIELDSET");
 //        fieldset.style = "padding-bottom: 50px"
         var legend = document.createElement("LEGEND");
@@ -53,8 +52,6 @@ function addLocation() {
         legend.innerHTML = "Unit " + c;
         fieldset.appendChild(legend)
         myForm.appendChild(fieldset)
-
-
 
 
         //Create remove form button
@@ -179,7 +176,7 @@ function addLocation() {
         lease.appendChild(leaseNo)
         lease.appendChild(leaseYes)
         fieldset.appendChild(lease)
-        
+
 
         var div = document.createElement("DIV");
 //        div.type="hidden"
@@ -191,9 +188,11 @@ function addLocation() {
 }
 
 function calculate() {
-    var result = document.getElementById("result");
+    var results = document.getElementById("result");
+    var result = "";
     var grades = [4];
     for (var i = 0; i < c; i++) {
+        result += '<form id="result' + parseInt(i + 1) + '">';
         grades[i] = 0
         var form = document.getElementById("form" + parseInt(i + 1));
         var address = document.getElementsByName("address")[i].value;
@@ -201,13 +200,6 @@ function calculate() {
         var lease = document.getElementsByName("lease")[i].value;
         var amenities = document.getElementsByName("amenities")[i].value;
         var landlord = document.getElementsByName("landlord")[i].value;
-        if (landlord == "yes") {
-            var foodInclusion = document.getElementById("foodInclusion" + parseInt(i + 1)).value;
-            if (foodInclusion == "yes") {
-                grades[i] += 0.5
-                alert(document.getElementById("foodInclusion" + parseInt(i + 1)).id)
-            }
-        }
 
         if (lease == "yes") {
             grades[i] += 1
@@ -217,37 +209,49 @@ function calculate() {
         }
         if (landlord == "no") {
             grades[i] += 0.5
-            if (foodInclusion == "yes")
+            result += document.getElementsByName("landlord")[i].id + ": " + landlord;
+            result += "<br>"
+        }
+        if (landlord == "yes") {
+            var foodInclusion = document.getElementById("foodInclusion" + parseInt(i + 1)).value;
+//            result += document.getElementsByName("landlord")[i].id + ": " + landlord;
+//            result += "<br>"
+            if (foodInclusion == "yes") {
                 grades[i] += 0.5
+//                alert(document.getElementById("foodInclusion" + parseInt(i + 1)).id)
+                result += document.getElementById("foodInclusion" + parseInt(i + 1)).id + ": " + foodInclusion;
+                result += "<br>"
+            }
         }
-        
-        if (price<450) {
+
+        if (price < 450) {
             grades[i] += 3
+            result += "This place is hella cheap<br>"
         }
-        else if (price>=450 & price <=650) {
+        else if (price >= 450 & price <= 650) {
             grades[i] += 2
+            result += "Can find anywhere<br>"
         }
-        else if (price>650 & price<1000) {
+        else if (price > 650 & price < 1000) {
             grades[i] += 1
+            result += "Kinda high<br>"
+
         }
-        else if (price>=1000) {
+        else if (price >= 1000) {
             grades[i] += 0
+            result += "Hell no!!<br>"
         }
         grades[i] += 3// address
 
-        //Print results
-        var text = "Unit " + form.id + ": " + grades[i]
-        var priceList = document.getElementsByName("price");
-        text += "\n Lease: " + lease
-        text += "\nAmen: " + amenities
-        text += "\nLord: " + landlord
-        var printGrades = document.createTextNode(text);
-        result.appendChild(printGrades)
-        result.appendChild(document.createElement("BR")); //Add newline
+        result += "<br>" + grades[i]
+        result += '</form>';
+
+
     }
+    results.innerHTML = result
 }
 
 
 //To-do:
-//- fix landlord feed you error (unit3: 6.5, unit: 7)
-//- Turn results into forms
+//Design a bit (remove button, add more print results)
+//Look into address
