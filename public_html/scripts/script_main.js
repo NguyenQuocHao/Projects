@@ -50,6 +50,7 @@ function addLocation() {
         var legend = document.createElement("LEGEND");
         legend.id = "unitText" + c;
         legend.innerHTML = "Unit " + c;
+        legend.style="text-align: left; margin-left:20px;";
         fieldset.appendChild(legend)
         myForm.appendChild(fieldset)
 
@@ -87,6 +88,7 @@ function addLocation() {
             c--;
         }
         fieldset.appendChild(button);
+        fieldset.appendChild(document.createElement("BR")); //Add newline
 
         //Create Address field
         var text = document.createTextNode("Address:" + c);
@@ -106,6 +108,7 @@ function addLocation() {
         var price = document.createElement("INPUT");
         price.type = "number";
         price.name = "price";
+        price.min=0;
         fieldset.appendChild(price);
 
 
@@ -209,7 +212,7 @@ function calculate() {
         }
         if (landlord == "no") {
             grades[i] += 0.5
-            result += document.getElementsByName("landlord")[i].id + ": " + landlord;
+//            result += document.getElementsByName("landlord")[i].id + ": " + landlord;
             result += "<br>"
         }
         if (landlord == "yes") {
