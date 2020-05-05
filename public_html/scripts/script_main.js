@@ -50,7 +50,7 @@ function addLocation() {
         var legend = document.createElement("LEGEND");
         legend.id = "unitText" + c;
         legend.innerHTML = "Unit " + c;
-        legend.style="text-align: left; margin-left:20px;";
+        legend.style = "text-align: left; margin-left:20px;";
         fieldset.appendChild(legend)
         myForm.appendChild(fieldset)
 
@@ -64,7 +64,10 @@ function addLocation() {
         button.onclick = function() {
             var lastChar = button.id.substr(button.id.length - 1);  //get last number id of the button
             var deleteForm = document.getElementById("form" + lastChar);
-//            alert("last char: " + lastChar)
+            if (document.getElementById('result').innerHTML !== ""){
+                var resultForm = document.getElementById("result" + lastChar);
+                resultForm.remove();    //Delete result
+            }
             deleteForm.remove(); //Delete the form
             unitTitle.remove();  //Delete form title
             if (lastChar < c) {
@@ -108,7 +111,9 @@ function addLocation() {
         var price = document.createElement("INPUT");
         price.type = "number";
         price.name = "price";
-        price.min=0;
+        price.id = "price" + c;
+        price.min = 0;
+        price.placeholder = "CAD";
         fieldset.appendChild(price);
 
 
@@ -136,7 +141,7 @@ function addLocation() {
 
         //Create Amenities field
         fieldset.appendChild(document.createElement("BR")); //Add newline
-        text = document.createTextNode("Does the rent paid include electricity, internet:");
+        text = document.createTextNode("Does the rent paid include electricity, water, internet:");
         fieldset.appendChild(text);
         fieldset.appendChild(document.createElement("BR")); //Add newline
         //Create options
@@ -195,6 +200,8 @@ function calculate() {
     var result = "";
     var grades = [4];
     for (var i = 0; i < c; i++) {
+        var positive = 'Pros: <ul style="list-style-type:none;margin-bottom: 10px">';
+        var negative = 'Cons: <ul style="list-style-type:none">';
         result += '<form id="result' + parseInt(i + 1) + '">';
         grades[i] = 0
         var form = document.getElementById("form" + parseInt(i + 1));
@@ -206,14 +213,21 @@ function calculate() {
 
         if (lease == "yes") {
             grades[i] += 1
+            positive += '<li style="color: green">+1: Lease is included.</li>'
+        }
+        else {
+            negative += '<li style="color: orange">No lease!? Seems sketchy...</li>'
         }
         if (amenities == "yes") {
             grades[i] += 2
+            positive += '<li style="color: green">+2: No worries about electricy bills.</li>'
+        }
+        else {
+            negative += '<li style="color: orange">Just remember to pay hydro bills.</li>'
         }
         if (landlord == "no") {
             grades[i] += 0.5
 //            result += document.getElementsByName("landlord")[i].id + ": " + landlord;
-            result += "<br>"
         }
         if (landlord == "yes") {
             var foodInclusion = document.getElementById("foodInclusion" + parseInt(i + 1)).value;
@@ -221,31 +235,39 @@ function calculate() {
 //            result += "<br>"
             if (foodInclusion == "yes") {
                 grades[i] += 0.5
-//                alert(document.getElementById("foodInclusion" + parseInt(i + 1)).id)
-                result += document.getElementById("foodInclusion" + parseInt(i + 1)).id + ": " + foodInclusion;
-                result += "<br>"
+                positive += '<li style="color: green">+0.5: You need not look for food anymore.</li>'
             }
+            else {
+                negative += '<li style="color: orange">No food inclusion. Fine, I will do it myself.</li>'
+            }
+        }
+        else {
+            positive += "<li style='color: green'>+0.5: You're the boss. Don't mess it up.</li>"
         }
 
         if (price < 450) {
             grades[i] += 3
-            result += "This place is hella cheap<br>"
+            positive += '<li style="color: green">+3: This place is ideally cheap!</li>'
         }
         else if (price >= 450 & price <= 650) {
             grades[i] += 2
-            result += "Can find anywhere<br>"
+            positive += '<li style="color: green">The price is average.</li>'
         }
         else if (price > 650 & price < 1000) {
             grades[i] += 1
-            result += "Kinda high<br>"
+            negative += '<li style="color: orange">The price is relatively high.</li>'
 
         }
         else if (price >= 1000) {
             grades[i] += 0
-            result += "Hell no!!<br>"
+            negative += '<li style="color: orange">Price is too high!</li>'
         }
         grades[i] += 3// address
 
+        positive += '</ul>'
+        negative += '</ul>'
+        result += positive
+        result += negative
         result += "<br>" + grades[i]
         result += '</form>';
 
