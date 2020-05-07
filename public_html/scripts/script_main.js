@@ -64,10 +64,6 @@ function addLocation() {
         button.onclick = function() {
             var lastChar = button.id.substr(button.id.length - 1);  //get last number id of the button
             var deleteForm = document.getElementById("form" + lastChar);
-            if (document.getElementById('result').innerHTML !== ""){
-                var resultForm = document.getElementById("result" + lastChar);
-                resultForm.remove();    //Delete result
-            }
             deleteForm.remove(); //Delete the form
             unitTitle.remove();  //Delete form title
             if (lastChar < c) {
@@ -114,6 +110,8 @@ function addLocation() {
         price.id = "price" + c;
         price.min = 0;
         price.placeholder = "CAD";
+        price.required = true;
+        price.title="Please enter the amount for an individual paid only";
         fieldset.appendChild(price);
 
 
@@ -196,6 +194,8 @@ function addLocation() {
 }
 
 function calculate() {
+    var calculateButton = document.getElementById("calculateButton");
+    calculateButton.innerHTML="Calculate ↻";
     var results = document.getElementById("result");
     var result = "";
     var grades = [4];
@@ -268,15 +268,25 @@ function calculate() {
         negative += '</ul>'
         result += positive
         result += negative
-        result += "<br>" + grades[i]
+        var printGrades = ""
+        if (grades[i] >= 9.5) {
+            printGrades += "<p class='goodresult'><strong>" + grades[i] + "</strong></p>"
+        }
+        else if (grades[i] >= 7.5 && grades[i] < 9.5) {
+            printGrades += "<p class='goodresult' style='background-color: #009933'><strong>" + grades[i] + "</strong></p>"
+        }
+        else if (grades[i] >= 6.5 && grades[i] < 7.5) {
+            printGrades += "<p class='goodresult' style='background-color: #00b33c'><strong>" + grades[i] + "</strong></p>"
+        }
+        else {
+            printGrades += "<p class='badresult'><strong>" + grades[i] + "</strong></p>"
+        }
+        result += printGrades
         result += '</form>';
-
-
     }
     results.innerHTML = result
 }
 
 
 //To-do:
-//Design a bit (remove button, add more print results)
 //Look into address

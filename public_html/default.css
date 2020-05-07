@@ -121,13 +121,14 @@ ul.actions li
 /* Button Style                                                                  */
 /*********************************************************************************/
 fieldset{
-    padding: 0px;
+    padding: 0px 0px 15px 0;
     margin:0px;
+    border-radius: 25px 25px 0 0;
     /*border: 0px;*/
 } 
 legend{
-    padding: 0px;
-    margin:0px;
+    padding: 0;
+    margin-left: 30px;
 }
 input.remove{
     border: none;
@@ -200,6 +201,18 @@ form{
     border: 10px solid black;
 }
 
+.goodresult{
+     color: white;
+     font-size: 20px;
+     border-radius: 0 0 20px 20px;
+     background-color: green;
+}
+.badresult{
+     color: black;
+     font-size: 20px;
+     border-radius: 0 0 20px 20px;
+     background-color: yellow;
+}
 
 /*********************************************************************************/
 /* Heading Titles                                                                */
