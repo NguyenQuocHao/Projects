@@ -129,6 +129,7 @@ fieldset{
 legend{
     padding: 0;
     margin-left: 30px;
+    font-weight: bold;
 }
 input.remove{
     border: none;
@@ -136,12 +137,14 @@ input.remove{
     color: grey;
     float: right;
     padding: 2px 10px;
-    /*    margin: 100px;*/
+    margin: 0 5px 0 0;
     /*clear: both;*/
 }
 input.remove:hover{
     background-color: red;
     color: white;
+    border-radius: 25%;
+
 }
 .button
 {
@@ -187,6 +190,10 @@ form{
     /*border: px solid red;*/
 }
 
+.inputField{
+    margin-bottom: 11px;
+}
+
 .result1,
 .result2,
 .result3,
@@ -202,16 +209,16 @@ form{
 }
 
 .goodresult{
-     color: white;
-     font-size: 20px;
-     border-radius: 0 0 20px 20px;
-     background-color: green;
+    color: white;
+    font-size: 20px;
+    border-radius: 0 0 20px 20px;
+    background-color: green;
 }
 .badresult{
-     color: black;
-     font-size: 20px;
-     border-radius: 0 0 20px 20px;
-     background-color: yellow;
+    color: black;
+    font-size: 20px;
+    border-radius: 0 0 20px 20px;
+    background-color: #ffcc00;
 }
 
 /*********************************************************************************/

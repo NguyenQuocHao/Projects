@@ -9,7 +9,7 @@ function check(landlordId) {
     var lastChar = landlordId.substr(landlordId.length - 1);  //get last number id of the button
     var foodInclusion = document.getElementById('foodInclusionContainer' + lastChar);
     if (landlord == "yes") {
-        var text = document.createTextNode("Does the landlord feed you: ");
+        var text = document.createTextNode("Does the landlord feed you:");
         foodInclusion.appendChild(text);
         foodInclusion.appendChild(document.createElement("BR")); //Add newline
         //Create options
@@ -44,7 +44,7 @@ function addLocation() {
         var myForm = document.createElement("FORM");
         myForm.id = "form" + c;
         myForm.name = "form";
-        var unitTitle = document.createElement("P"); //Title for each form
+//        var unitTitle = document.createElement("BR"); //Title for each form
         var fieldset = document.createElement("FIELDSET");
 //        fieldset.style = "padding-bottom: 50px"
         var legend = document.createElement("LEGEND");
@@ -65,7 +65,7 @@ function addLocation() {
             var lastChar = button.id.substr(button.id.length - 1);  //get last number id of the button
             var deleteForm = document.getElementById("form" + lastChar);
             deleteForm.remove(); //Delete the form
-            unitTitle.remove();  //Delete form title
+//            unitTitle.remove();  //Delete form title
             if (lastChar < c) {
                 var gap = c - lastChar;
                 for (var i = 1; i <= gap; i++) {
@@ -90,12 +90,13 @@ function addLocation() {
         fieldset.appendChild(document.createElement("BR")); //Add newline
 
         //Create Address field
-        var text = document.createTextNode("Address:" + c);
+        var text = document.createTextNode("Address:");
         fieldset.appendChild(text);
         fieldset.appendChild(document.createElement("BR")); //Add newline
         var address = document.createElement("INPUT");
         address.setAttribute("type", "text");
         address.setAttribute("name", "address");
+        address.setAttribute("class", "inputField");
         fieldset.appendChild(address);
 
 
@@ -111,13 +112,14 @@ function addLocation() {
         price.min = 0;
         price.placeholder = "CAD";
         price.required = true;
-        price.title="Please enter the amount for an individual paid only";
+        price.title = "Please enter the amount for an individual paid only";
+        price.setAttribute("class", "inputField");
         fieldset.appendChild(price);
 
 
         //Create Lease field
         fieldset.appendChild(document.createElement("BR")); //Add newline
-        text = document.createTextNode("Does the place include lease:");
+        text = document.createTextNode("Leasing included:");
         fieldset.appendChild(text);
         fieldset.appendChild(document.createElement("BR")); //Add newline
         //Create options
@@ -134,12 +136,13 @@ function addLocation() {
         leaseYes.value = "yes"
         lease.appendChild(leaseNo)
         lease.appendChild(leaseYes)
+        lease.setAttribute("class", "inputField");
         fieldset.appendChild(lease)
 
 
         //Create Amenities field
         fieldset.appendChild(document.createElement("BR")); //Add newline
-        text = document.createTextNode("Does the rent paid include electricity, water, internet:");
+        text = document.createTextNode("Electricity, water, internet bill included:");
         fieldset.appendChild(text);
         fieldset.appendChild(document.createElement("BR")); //Add newline
         //Create options
@@ -156,6 +159,7 @@ function addLocation() {
         leaseYes.value = "yes"
         lease.appendChild(leaseNo)
         lease.appendChild(leaseYes)
+        lease.setAttribute("class", "inputField");
         fieldset.appendChild(lease)
 
 
@@ -181,6 +185,7 @@ function addLocation() {
         leaseYes.value = "yes"
         lease.appendChild(leaseNo)
         lease.appendChild(leaseYes)
+        lease.setAttribute("class", "inputField");
         fieldset.appendChild(lease)
 
 
@@ -195,7 +200,7 @@ function addLocation() {
 
 function calculate() {
     var calculateButton = document.getElementById("calculateButton");
-    calculateButton.innerHTML="Calculate ↻";
+    calculateButton.innerHTML = "Calculate ↻";
     var results = document.getElementById("result");
     var result = "";
     var grades = [4];
@@ -269,14 +274,17 @@ function calculate() {
         result += positive
         result += negative
         var printGrades = ""
-        if (grades[i] >= 9.5) {
+        if (grades[i] >= 9) {
             printGrades += "<p class='goodresult'><strong>" + grades[i] + "</strong></p>"
         }
-        else if (grades[i] >= 7.5 && grades[i] < 9.5) {
+        else if (grades[i] >= 7.5 && grades[i] < 9) {
             printGrades += "<p class='goodresult' style='background-color: #009933'><strong>" + grades[i] + "</strong></p>"
         }
         else if (grades[i] >= 6.5 && grades[i] < 7.5) {
             printGrades += "<p class='goodresult' style='background-color: #00b33c'><strong>" + grades[i] + "</strong></p>"
+        }
+        else if (grades[i] >= 4 && grades[i] < 6.5){
+            printGrades += "<p class='badresult'  style='background-color: yellow'  ><strong>" + grades[i] + "</strong></p>"
         }
         else {
             printGrades += "<p class='badresult'><strong>" + grades[i] + "</strong></p>"
