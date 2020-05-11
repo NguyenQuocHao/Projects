@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function check(landlordId) {
+function checkFoodInclusion(landlordId) {
 //    document.getElementById('mySelect1').disabled = !elem.selectedIndex;
     var landlord = document.getElementById(landlordId).value;
     var lastChar = landlordId.substr(landlordId.length - 1);  //get last number id of the button
@@ -44,13 +44,15 @@ function addLocation() {
         var myForm = document.createElement("FORM");
         myForm.id = "form" + c;
         myForm.name = "form";
+        myForm.style="text-align:left";
 //        var unitTitle = document.createElement("BR"); //Title for each form
         var fieldset = document.createElement("FIELDSET");
+        fieldset.style="padding-left:20px";
 //        fieldset.style = "padding-bottom: 50px"
         var legend = document.createElement("LEGEND");
         legend.id = "unitText" + c;
         legend.innerHTML = "Unit " + c;
-        legend.style = "text-align: left; margin-left:20px;";
+        legend.style = "text-align: left; margin-left:0px;";
         fieldset.appendChild(legend)
         myForm.appendChild(fieldset)
 
@@ -73,15 +75,32 @@ function addLocation() {
                     var replaceForm = document.getElementById("form" + replaceFormPosition);
                     var newUnitText = document.getElementById("unitText" + replaceFormPosition);
                     var newButton = document.getElementById("removeButton" + replaceFormPosition);
-//                    alert(newButton.id);
+                    var replaceAddress = document.getElementById("address" + replaceFormPosition);
+                    var replacePrice = document.getElementById("price" + replaceFormPosition);
+                    var replaceLease = document.getElementById("lease" + replaceFormPosition);
+                    var replaceAmenities = document.getElementById("amenities" + replaceFormPosition);
+                    var replaceLandlord = document.getElementById("landlord" + replaceFormPosition);
+                    var foodInclusionContainer = document.getElementById("foodInclusionContainer" + replaceFormPosition);
+                    var foodInclusion = document.getElementById("foodInclusion" + replaceFormPosition);
+//                    alert(button.id)
 
                     var newLastChar = replaceForm.id.substr(replaceForm.id.length - 1);
                     replaceFormPosition = parseInt(newLastChar) - 1;
-                    replaceForm.id = "form" + replaceFormPosition;// 
-                    newUnitText.id = "unitText" + replaceFormPosition;// 
+                    replaceForm.id = "form" + replaceFormPosition;
+                    newUnitText.id = "unitText" + replaceFormPosition;
 //                    newUnitText.innerHTML = "Unit " + replaceFormPosition;
-                    newUnitText.innerHTML += replaceFormPosition;
-                    newButton.id = "removeButton" + replaceFormPosition;// 
+                    newUnitText.innerHTML = "Unit " + replaceFormPosition;
+                    newButton.id = "removeButton" + replaceFormPosition;
+                    replaceAddress.id = "address" + replaceFormPosition;
+                    replacePrice.id = "price" + replaceFormPosition;
+                    replaceLease.id= "lease" + replaceFormPosition;
+                    replaceAmenities.id = "amenities" + replaceFormPosition;
+                    replaceLandlord.id = "landlord" + replaceFormPosition;
+                    foodInclusionContainer.id = "foodInclusionContainer" + replaceFormPosition;// 
+                    if (foodInclusion) {    //check if element exists
+                        foodInclusion.id = "foodInclusion" + replaceFormPosition;// 
+
+                    }
                 }
             }
             c--;
@@ -89,15 +108,18 @@ function addLocation() {
         fieldset.appendChild(button);
         fieldset.appendChild(document.createElement("BR")); //Add newline
 
-        //Create Address field
-        var text = document.createTextNode("Address:");
+        //Create Distance field
+        var text = document.createTextNode("Distance to work/study:");
         fieldset.appendChild(text);
         fieldset.appendChild(document.createElement("BR")); //Add newline
-        var address = document.createElement("INPUT");
-        address.setAttribute("type", "text");
-        address.setAttribute("name", "address");
-        address.setAttribute("class", "inputField");
-        fieldset.appendChild(address);
+        var distance = document.createElement("INPUT");
+        distance.setAttribute("type", "number");
+        distance.setAttribute("name", "address");
+        distance.id = "address" + c
+        distance.setAttribute("class", "inputField");
+        distance.placeholder = "km"
+        distance.value = 0
+        fieldset.appendChild(distance);
 
 
         //Create Price field
@@ -110,6 +132,7 @@ function addLocation() {
         price.name = "price";
         price.id = "price" + c;
         price.min = 0;
+        price.value = 0;
         price.placeholder = "CAD";
         price.required = true;
         price.title = "Please enter the amount for an individual paid only";
@@ -142,7 +165,7 @@ function addLocation() {
 
         //Create Amenities field
         fieldset.appendChild(document.createElement("BR")); //Add newline
-        text = document.createTextNode("Electricity, water, internet bill included:");
+        text = document.createTextNode("Electricity, water, internet included:");
         fieldset.appendChild(text);
         fieldset.appendChild(document.createElement("BR")); //Add newline
         //Create options
@@ -173,8 +196,8 @@ function addLocation() {
         lease.id = "landlord" + c
         lease.name = "landlord"
         lease.onchange = function() {
-            check(lease.id)
-        } //;"if (this.selectedIndex) check()";
+            checkFoodInclusion(lease.id)
+        }
         var leaseNo = document.createElement("OPTION");
         var t = document.createTextNode("No");
         leaseNo.appendChild(t);
@@ -216,6 +239,9 @@ function calculate() {
         var amenities = document.getElementsByName("amenities")[i].value;
         var landlord = document.getElementsByName("landlord")[i].value;
 
+        // Check if input is valid
+        isInputValid(price)
+
         if (lease == "yes") {
             grades[i] += 1
             positive += '<li style="color: green">+1: Lease is included.</li>'
@@ -247,7 +273,32 @@ function calculate() {
             }
         }
         else {
-            positive += "<li style='color: green'>+0.5: You're the boss. Don't mess it up.</li>"
+            positive += "<li style='color: green'>+0.5: The freedom is yours.</li>"
+        }
+        //Price conditions
+        if (address < 2) {
+            grades[i] += 3
+            positive += '<li style="color: green">+3: You can walk from home.</li>'
+        }
+        else if (address >= 2 && address < 7) {
+            grades[i] += 2.5
+            positive += '<li style="color: green">+2.5: You may be the bus.</li>'
+        }
+        else if (address >= 7 && address < 12) {
+            grades[i] += 2.5
+            positive += '<li style="color: green">+2.5: You may be public transit.</li>'
+        }
+        else if (address >= 12 & address < 20) {
+            grades[i] += 1.5
+            negative += '<li style="color: orange">Kinda far!</li>'
+        }
+        else if (address >= 20 & address < 50) {
+            grades[i] += 1
+            negative += '<li style="color: orange">Too far!!</li>'
+        }
+        else {
+            negative += '<li style="color: orange">You might wanna choose differnt place, or job.</li>'
+
         }
 
         if (price < 450) {
@@ -256,18 +307,16 @@ function calculate() {
         }
         else if (price >= 450 & price <= 650) {
             grades[i] += 2
-            positive += '<li style="color: green">The price is average.</li>'
+            positive += '<li style="color: green">+2: The price is average.</li>'
         }
         else if (price > 650 & price < 1000) {
             grades[i] += 1
             negative += '<li style="color: orange">The price is relatively high.</li>'
-
         }
         else if (price >= 1000) {
             grades[i] += 0
             negative += '<li style="color: orange">Price is too high!</li>'
         }
-        grades[i] += 3// address
 
         positive += '</ul>'
         negative += '</ul>'
@@ -283,7 +332,7 @@ function calculate() {
         else if (grades[i] >= 6.5 && grades[i] < 7.5) {
             printGrades += "<p class='goodresult' style='background-color: #00b33c'><strong>" + grades[i] + "</strong></p>"
         }
-        else if (grades[i] >= 4 && grades[i] < 6.5){
+        else if (grades[i] >= 4 && grades[i] < 6.5) {
             printGrades += "<p class='badresult'  style='background-color: yellow'  ><strong>" + grades[i] + "</strong></p>"
         }
         else {
@@ -293,6 +342,20 @@ function calculate() {
         result += '</form>';
     }
     results.innerHTML = result
+}
+
+function isInputValid(input) {
+    if (isNaN(input) == 'true') {
+        alert('Please enter only number!')
+        return false;
+    }
+    else {
+        return true;
+    }
+    if (parseFloat(input) < 0) {
+        alert('Please enter number larger or equal to 0.')
+        return false;
+    }
 }
 
 
