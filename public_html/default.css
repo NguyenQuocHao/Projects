@@ -260,13 +260,14 @@ form{
 {
     position: relative;
     padding: 5em 0em 7em 0em;
-    background: #111111 url(images/header-bg.jpg) no-repeat center;
+    background: #111111 url(images/test_final.jpg) no-repeat center;
     background-size: cover;
 }
 
 #header
 {
     position: relative;
+    
     padding: 5em 0em;
 }
 
