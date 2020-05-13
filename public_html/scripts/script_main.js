@@ -3,36 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function checkFoodInclusion(landlordId) {
-//    document.getElementById('mySelect1').disabled = !elem.selectedIndex;
-    var landlord = document.getElementById(landlordId).value;
-    var lastChar = landlordId.substr(landlordId.length - 1);  //get last number id of the button
-    var foodInclusion = document.getElementById('foodInclusionContainer' + lastChar);
-    if (landlord == "yes") {
-        var text = document.createTextNode("Does the landlord feed you:");
-        foodInclusion.appendChild(text);
-        foodInclusion.appendChild(document.createElement("BR")); //Add newline
-        //Create options
-        var foodInclusionOpts = document.createElement("SELECT");
-        foodInclusionOpts.id = "foodInclusion" + lastChar
-        foodInclusionOpts.name = "foodInclusion"
-        var foodInclusionOptsNo = document.createElement("OPTION");
-        var t = document.createTextNode("No");
-        foodInclusionOptsNo.appendChild(t);
-        foodInclusionOptsNo.value = "no"
-        var foodInclusionOptsYes = document.createElement("OPTION");
-        t = document.createTextNode("Yes");
-        foodInclusionOptsYes.appendChild(t);
-        foodInclusionOptsYes.value = "yes"
-        foodInclusionOpts.appendChild(foodInclusionOptsNo)
-        foodInclusionOpts.appendChild(foodInclusionOptsYes)
-        foodInclusion.appendChild(foodInclusionOpts)
-
-    }
-    else
-        document.getElementById(foodInclusion.id).innerHTML = "";
-}
-
 var c = 0;
 function addLocation() {
     var formSection = document.getElementById("formSection");
@@ -118,7 +88,9 @@ function addLocation() {
         distance.id = "address" + c
         distance.setAttribute("class", "inputField");
         distance.placeholder = "km"
+        distance.min = 0
         distance.value = 0
+        distance.required = true;
         fieldset.appendChild(distance);
 
 
@@ -269,7 +241,7 @@ function calculate() {
                 positive += '<li style="color: green">+0.5: You need not look for food anymore.</li>'
             }
             else {
-                negative += '<li style="color: orange">No food inclusion. Fine, I will do it myself.</li>'
+                negative += '<li style="color: orange">Live nicely. Share with landlord.</li>'
             }
         }
         else {
@@ -282,11 +254,11 @@ function calculate() {
         }
         else if (address >= 2 && address < 7) {
             grades[i] += 2.5
-            positive += '<li style="color: green">+2.5: You may be the bus.</li>'
+            positive += '<li style="color: green">+2.5: You may travel by bus.</li>'
         }
         else if (address >= 7 && address < 12) {
             grades[i] += 2.5
-            positive += '<li style="color: green">+2.5: You may be public transit.</li>'
+            positive += '<li style="color: green">+2.5: You might wanna use public transit.</li>'
         }
         else if (address >= 12 & address < 20) {
             grades[i] += 1.5
@@ -342,6 +314,36 @@ function calculate() {
         result += '</form>';
     }
     results.innerHTML = result
+}
+
+function checkFoodInclusion(landlordId) {
+//    document.getElementById('mySelect1').disabled = !elem.selectedIndex;
+    var landlord = document.getElementById(landlordId).value;
+    var lastChar = landlordId.substr(landlordId.length - 1);  //get last number id of the button
+    var foodInclusion = document.getElementById('foodInclusionContainer' + lastChar);
+    if (landlord == "yes") {
+        var text = document.createTextNode("Does the landlord feed you:");
+        foodInclusion.appendChild(text);
+        foodInclusion.appendChild(document.createElement("BR")); //Add newline
+        //Create options
+        var foodInclusionOpts = document.createElement("SELECT");
+        foodInclusionOpts.id = "foodInclusion" + lastChar
+        foodInclusionOpts.name = "foodInclusion"
+        var foodInclusionOptsNo = document.createElement("OPTION");
+        var t = document.createTextNode("No");
+        foodInclusionOptsNo.appendChild(t);
+        foodInclusionOptsNo.value = "no"
+        var foodInclusionOptsYes = document.createElement("OPTION");
+        t = document.createTextNode("Yes");
+        foodInclusionOptsYes.appendChild(t);
+        foodInclusionOptsYes.value = "yes"
+        foodInclusionOpts.appendChild(foodInclusionOptsNo)
+        foodInclusionOpts.appendChild(foodInclusionOptsYes)
+        foodInclusion.appendChild(foodInclusionOpts)
+
+    }
+    else
+        document.getElementById(foodInclusion.id).innerHTML = "";
 }
 
 function isInputValid(input) {
