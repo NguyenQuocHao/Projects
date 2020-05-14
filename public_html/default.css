@@ -59,78 +59,9 @@ a:hover
 }
 
 /*********************************************************************************/
-/* Image Style                                                                   */
-/*********************************************************************************/
-
-.image
-{
-    display: inline-block;
-}
-
-.image img
-{
-    display: block;
-    width: 100%;
-}
-
-.image-full
-{
-    display: block;
-    width: 100%;
-    margin: 0 0 2em 0;
-}
-
-.image-left
-{
-    float: left;
-    margin: 0 2em 2em 0;
-}
-
-.image-centered
-{
-    display: block;
-    margin: 0 0 2em 0;
-}
-
-.image-centered img
-{
-    margin: 0 auto;
-    width: auto;
-}
-
-/*********************************************************************************/
-/* List Styles                                                                   */
-/*********************************************************************************/
-
-ul.style1
-{
-}
-
-ul.actions
-{
-}
-
-ul.actions li
-{
-    display: inline-block;
-    padding: 0em 0.50em;
-}
-
-
-/*********************************************************************************/
 /* Button Style                                                                  */
 /*********************************************************************************/
-fieldset{
-    padding: 0px 0px 15px 0;
-    margin:0px;
-    border-radius: 25px 25px 0 0;
-    /*border: 0px;*/
-} 
-legend{
-    padding: 0;
-    margin-left: 30px;
-    font-weight: bold;
-}
+
 input.remove{
     border: none;
     background: none;
@@ -173,36 +104,16 @@ input.remove:hover{
 /* 3-column                                                                      */
 /*********************************************************************************/
 
-.form1,
-.form2,
-.form3,
-.form4
-{
-    display: inline-block;
-    width: 275px;
-    /*margin: 10px;*/
-
-}
 form{
     display: inline-block;
     width: 275px;
-    margin: 10px;
+    margin: 0 10px 0 10px;
 }
 
 .inputField{
-    margin-bottom: 11px;
+    margin-bottom: 10px;
 }
 
-.result1,
-.result2,
-.result3,
-.result4
-{
-    display: inline-block;
-    width: 275px;
-    margin: 10px;
-
-}
 .result1{
     border: 10px solid black;
 }
@@ -218,6 +129,17 @@ form{
     font-size: 20px;
     border-radius: 0 0 20px 20px;
     background-color: #ffcc00;
+}
+
+fieldset{
+    padding: 0px 0px 15px 0;
+    margin:0px;
+    border-radius: 25px 25px 0 0;
+} 
+legend{
+    padding: 0;
+    margin-left: 30px;
+    font-weight: bold;
 }
 
 /*********************************************************************************/
@@ -237,6 +159,7 @@ form{
 .title .byline
 {
     font-size: 1.3em;
+    /*text-shadow: 1px 0px #a3a375;*/
     color: rgba(255,255,255,0.60);
 }
 
@@ -414,4 +337,3 @@ form{
     text-align: center;
     color: rgba(0,0,0,.5);
 }
-
