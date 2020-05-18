@@ -202,7 +202,7 @@ function calculate() {
     for (var i = 0; i < c; i++) {
         var positive = 'Pros: <ul style="list-style-type:none;margin-bottom: 10px">';
         var negative = 'Cons: <ul style="list-style-type:none">';
-        result += '<form id="result' + parseInt(i + 1) + '">';
+        result += '<form class="result" id="result' + parseInt(i + 1) + '">';
         grades[i] = 0
         var form = document.getElementById("form" + parseInt(i + 1));
         var address = document.getElementsByName("address")[i].value;

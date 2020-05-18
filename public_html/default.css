@@ -1,6 +1,7 @@
 html, body
 {
     height: 100%;
+    width: 100%;
 }
 
 body
@@ -114,8 +115,14 @@ form{
     margin-bottom: 10px;
 }
 
-.result1{
-    border: 10px solid black;
+.result{
+    /*border: 10px solid black;*/
+    animation: res 1s 0s forwards;
+    opacity: 0;
+}
+@keyframes res {
+    from {opacity:0}
+    to {opacity:1}
 }
 
 .goodresult{
@@ -162,6 +169,33 @@ legend{
     /*text-shadow: 1px 0px #a3a375;*/
     color: rgba(255,255,255,0.60);
 }
+.animatable {
+  position: relative;
+  clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+  animation: 2.75s cubic-bezier(1,-0.01,.12,.8) 2s 1 reveal forwards;
+}
+.animatable::after {
+  content: '< 3';
+  text-align: left;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #20262b;
+  padding: inherit; 
+  animation: 1.75s cubic-bezier(1,-0.01,.12,.8) 3.5s 1 hideBlack forwards;
+}
+
+@keyframes reveal {
+  from { clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%); }
+  to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+}
+
+@keyframes hideBlack {
+  from { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+  to { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); }
+}
 
 /*********************************************************************************/
 /* Header                                                                        */
@@ -184,12 +218,17 @@ legend{
     padding: 5em 0em 7em 0em;
     background: #111111 url(images/test_final.jpg) no-repeat center;
     background-size: cover;
+    animation: header-wrapper 3s forwards;
+}
+@keyframes header-wrapper {
+    from {opacity:0}
+    to {opacity:1}
 }
 
 #header
 {
     position: relative;
-    
+
     padding: 5em 0em;
 }
 
@@ -208,6 +247,36 @@ legend{
 {
     font-size: 2.6em;
     color: #79C255;
+    animation: logoAni 1.5s 1.5s forwards;
+    opacity: 0;
+}
+@keyframes logoAni {
+    from {opacity:0}
+    to {opacity:1}
+}
+.welcome-message{
+    /*    animation-name: header;
+        animation-duration: 2.5s;*/
+    animation: header 1s 2s forwards;
+    opacity: 0;
+    transform: translate3d(0,0,0);
+}
+@keyframes header {
+    0% {
+        /*			-moz-transform: translate3d(0,1em,0);
+                                -webkit-transform: translate3d(0,1em,0);
+                                -ms-transform: translate3d(0,1em,0);*/
+        transform: translate3d(0,1em,0);
+        opacity: 0;
+    }
+
+    100% {
+        /*			-moz-transform: translate3d(0,0,0);
+                                -webkit-transform: translate3d(0,0,0);
+                                -ms-transform: translate3d(0,0,0);*/
+        transform: translate3d(0,0,0);
+        opacity: 1;
+    }
 }
 
 #logo a
