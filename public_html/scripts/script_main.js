@@ -237,7 +237,7 @@ function calculate() {
 //            result += document.getElementsByName("landlord")[i].id + ": " + landlord;
 //            result += "<br>"
             if (foodInclusion == "yes") {
-                grades[i] += 0.5
+                grades[i] += 0.3
                 positive += '<li style="color: green">+0.5: You need not look for food anymore.</li>'
             }
             else {
