@@ -54,9 +54,10 @@ a:hover
 
 .container
 {
-    overflow: hidden;
+    /*overflow: hidden;*/
     margin: 0em auto;
-    width: 1200px;
+    /*width: 1200px;*/
+    width: 100%;
 }
 
 /*********************************************************************************/
@@ -217,7 +218,7 @@ legend{
 #header-wrapper
 {
     position: relative;
-    padding: 2em 0em 7em 0em;
+    padding: 3em 0em 7em 0em;
     background: #111111 url(images/test_final.jpg) no-repeat center;
     background-size: cover;
     animation: header-wrapper 3s forwards;
@@ -230,7 +231,6 @@ legend{
 #header
 {
     position: relative;
-
     padding: 5em 0em;
 }
 
@@ -242,7 +242,8 @@ legend{
 {
     position: absolute;
     top: 3.6em;
-    left: 0;
+    left: 2em;
+    /*right:*/ 
 }
 
 #logo h1
@@ -328,7 +329,7 @@ legend{
 
 #copyright
 {
-    overflow: hidden;
+    /*overflow: hidden;*/
     padding: 5em 0em;
     border-top: 1px solid rgba(0,0,0,0.08);
 }
@@ -362,8 +363,9 @@ legend{
 
 #welcome .container
 {
-    width: 1000px;
-    padding: 0px 100px;
+    /*width: 1000px;*/
+    width: 60%;
+    /*padding: 0px 100px;*/
     color: rgba(255,255,255,0.8);
 }
 
